@@ -1,17 +1,17 @@
 <template>
   <div class="user_msg">
     <div class="introduce">
-      <img src="../assets/头像.jpeg" class="logo">
+      <img src="../assets/头像.jpeg" class="logo" alt="">
       <p style="font-size: 18px;font-weight: bold;">哈哈哈哈</p>
     </div>
     <div class="tag_div" style="height: 270px">
 <!--      <p class="tit">标签云</p>-->
-      <Tagcloud></Tagcloud>
+      <Tag_cloud></Tag_cloud>
 <!--      <span v-for="item in tagList" :key="item.id"><router-link :to="'/Article/'+item._id">{{item.name}}</router-link></span>-->
     </div>
     <div class="introduce">
       <p class="tit">技术</p>
-      <img src="../assets/BiaoChenXuYing.png" style="width: 100%">
+      <img src="../assets/js.png" style="width: 100%" alt="">
 
     </div>
 <!--    <div class="introduce">-->
@@ -23,11 +23,11 @@
 </template>
 
 <script>
-import Tagcloud from '../components/tagcloud'
+import Tag_cloud from '../components/tagcloud'
 export default {
   name: "right",
   components: {
-    Tagcloud
+    Tag_cloud
   },
   data() {
     return {
@@ -74,10 +74,10 @@ export default {
 .logo {
   width: 130px;
   border-radius: 50%;
-  animation: mylogo 3s;
-  -moz-animation: mylogo 3s;
-  -webkit-animation: mylogo 3s;
-  -o-animation: mylogo 3s;
+  animation: logo 3s;
+  -moz-animation: logo 3s;
+  -webkit-animation: logo 3s;
+  -o-animation: logo 3s;
   animation-iteration-count: infinite;
 }
 
@@ -110,7 +110,7 @@ export default {
   color: #3f9eff
 }
 
-@keyframes mylogo {
+@keyframes logo {
   0% {
     transform: rotate(0deg) scale(0.8, 0.8);
     opacity: 1;
@@ -125,7 +125,7 @@ export default {
   }
 }
 
-@-moz-keyframes mylogo {
+@-moz-keyframes logo {
   0% {
     transform: rotate(0deg) scale(0.8, 0.8);
     opacity: 1;
@@ -140,7 +140,7 @@ export default {
   }
 }
 
-@-webkit-keyframes mylogo {
+@-webkit-keyframes logo {
   0% {
     transform: rotate(0deg) scale(0.8, 0.8);
     opacity: 1;
@@ -155,7 +155,7 @@ export default {
   }
 }
 
-@-o-keyframes mylogo {
+@-o-keyframes logo {
   0% {
     transform: rotate(0deg) scale(0.8, 0.8);
     opacity: 1;
