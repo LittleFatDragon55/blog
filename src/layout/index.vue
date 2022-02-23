@@ -2,7 +2,7 @@
   <div id="app">
     <canvas id="myCanvas" width="800px" height="600px"></canvas>
     <Header></Header>
-    <div class="bottom">
+    <div class="bottom" :style="'height:'+height ">
       <div class="center">
         <el-row :gutter="10">
           <el-col :md="18">
@@ -23,9 +23,8 @@
 import Header from "./header";
 import Footer from "./footer";
 import Right from "./right";
-import {bubbleCursor} from "../assets/bubbleCursor"
-import {emojiCursor} from "../assets/emojiCursor"
-
+// import {bubbleCursor} from "../assets/bubbleCursor"
+// import {emojiCursor} from "../assets/emojiCursor"
 import {fairyDustCursor} from "../assets/fairyDustCursor"
 
 export default {
@@ -37,13 +36,21 @@ export default {
   },
   data() {
     return {
-      state: false
+      state: false,
+      height:"600px",
+      clientHeight:"",
+    }
+  },
+  watch:{
+    clientHeight(){
+      this.height = this.clientHeight-160+"px"
     }
   },
   mounted() {
     // bubbleCursor({ element: document.querySelector("#app") })
     // emojiCursor({ element: document.querySelector("#app") })
-
+   this.clientHeight =  `${document.documentElement.clientHeight}`;//获取浏览器可视区域高度
+    console.log(this.clientHeight)
     fairyDustCursor({ element: document.querySelector("#app") })
 
     let canvas = document.getElementById("myCanvas");
@@ -91,6 +98,7 @@ export default {
   height: 700px;
   position: fixed;
   top: 60px;
+  overflow: auto;
 }
 
 .center {

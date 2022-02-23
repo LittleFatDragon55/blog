@@ -14,6 +14,12 @@ Vue.prototype.axios = axios
 // Vue.use(ElementUI);
 Vue.use(Element, { size: 'small', zIndex: 3000 });
 Vue.config.productionTip = false
+
+router.afterEach(() => {
+  document.getElementsByClassName("bottom")[0].scrollTop = 0//回到顶部
+
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
