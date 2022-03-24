@@ -1,8 +1,8 @@
 <template>
   <div class="user_msg">
     <div class="introduce">
-      <img src="../assets/头像.jpeg" class="logo" alt="">
-      <p style="font-size: 18px;font-weight: bold;">哈哈哈哈</p>
+      <img :src="user.avatar" class="logo" alt="">
+      <p style="font-size: 18px;font-weight: bold;">{{user.username}}</p>
     </div>
     <div class="tag_div" style="height: 270px">
 <!--      <p class="tit">标签云</p>-->
@@ -33,10 +33,14 @@ export default {
     return {
       tagList: [],
       myColors: ['#1f77b4', '#629fc9', '#94bedb', '#c9e0ef'],
+      user:{}
     }
+  },
+  computed:{
   },
   mounted() {
     this.tags()
+    this.user=JSON.parse(sessionStorage.getItem("userInfo"))
   },
   methods: {
     tags() {

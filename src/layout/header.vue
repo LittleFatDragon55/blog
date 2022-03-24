@@ -28,10 +28,24 @@
         <router-link to="/tags" :class="route_path==='tags'?'text_color':''"><span>关于</span></router-link>
       </el-col>
       <el-col :md="11" class="hidden-sm-and-down">
-        <el-button class="button_style" type="primary">登陆</el-button>
+        <el-button class="button_style" type="primary" @click="show=true">登陆</el-button>
         <el-button class="button_style" type="danger">注册</el-button>
       </el-col>
     </el-row>
+    <el-dialog :visible.sync="show" center title="登录" :modal-append-to-body="false">
+      <el-form label-width="100px">
+        <el-form-item label="用户名">
+          <el-input v-model="name"/>
+        </el-form-item>
+        <el-form-item label="密码">
+          <el-input v-model="password"/>
+        </el-form-item>
+        <el-form-item style="text-align: center">
+          <el-button class="button_style" type="primary" @click="submit">登陆</el-button>
+          <el-button class="button_style" type="primary" @click="show=false">取消</el-button>
+        </el-form-item>
+      </el-form>
+    </el-dialog>
   </div>
 </template>
 
@@ -43,13 +57,17 @@ export default {
   data() {
     return {
       iscolor: false,
-      route_path: window.location.hash.split("/")[1]
+      route_path: window.location.hash.split("/")[1],
+      show: false,
+      name: "",
+      password: ""
     }
   },
   computed: {
     ...mapState({
       state_page: state => state.state_page
-    })
+    }),
+
   },
   watch: {
     $route() {
@@ -61,6 +79,27 @@ export default {
   mounted() {
     console.log(window.location.hash)
     console.log(this.state_page)
+
+  },
+  methods: {
+    submit() {
+      if (this.name == "") {
+        this.$message("请填写用户名!")
+        return false
+      }
+      if (this.password == "") {
+        this.$message("请填写密码!")
+        return false
+      }
+      console.log(this.name, this.password)
+      this.axios.post("/api/users/login", {username: this.name, password: this.password}).then(res => {
+        sessionStorage.setItem("userInfo", JSON.stringify(res.data.data.userInfo))
+        location.reload()
+        this.show = false
+      }).catch(err => {
+        console.log(err)
+      })
+    }
   }
 }
 </script>

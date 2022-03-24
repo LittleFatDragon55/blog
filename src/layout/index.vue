@@ -26,6 +26,7 @@ import Right from "./right";
 // import {bubbleCursor} from "../assets/bubbleCursor"
 // import {emojiCursor} from "../assets/emojiCursor"
 import {fairyDustCursor} from "../assets/fairyDustCursor"
+import {init} from "../assets/balloon"
 
 export default {
   name: 'App',
@@ -37,55 +38,25 @@ export default {
   data() {
     return {
       state: false,
-      height:"600px",
-      clientHeight:"",
+      height: "600px",
+      clientHeight: "",
     }
   },
-  watch:{
-    clientHeight(){
-      this.height = this.clientHeight-160+"px"
+  watch: {
+    clientHeight() {
+      this.height = this.clientHeight - 160 + "px"
     }
   },
   mounted() {
     // bubbleCursor({ element: document.querySelector("#app") })
     // emojiCursor({ element: document.querySelector("#app") })
-   this.clientHeight =  `${document.documentElement.clientHeight}`;//获取浏览器可视区域高度
+    this.clientHeight = `${document.documentElement.clientHeight}`;//获取浏览器可视区域高度
     console.log(this.clientHeight)
-    fairyDustCursor({ element: document.querySelector("#app") })
+    fairyDustCursor({element: document.querySelector("#app")})
+    // init()
 
-    let canvas = document.getElementById("myCanvas");
-    let context = canvas.getContext("2d");
-    let iWidth = canvas.width
-    let iHeight = canvas.height
-    let length = 20
-    let speed = -1
-
-    context.fillStyle = 'red';
-    context.beginPath();
-    context.fillRect(0, 0, length, length);//绘制矩形
-    context.arc(length, (iHeight / 2), length, 0, 2 * Math.PI, true);//圆
-    context.closePath();
-    context.fill();
-    let startPoint = iHeight - length;
-    let self = this
-    setInterval(function () {
-      startPoint += speed;
-      if (startPoint <= (-1 * length)) {
-        startPoint = iHeight - length
-      }
-      self.run(context, iWidth, iHeight, length, startPoint);
-    }, 30);
   },
-  methods: {
-    run(cxt, width, height, length, point) {
-      cxt.clearRect(0, 0, width, height);
-      cxt.beginPath();
-      cxt.fillRect(0, point, length, length);
-      cxt.arc(length, (point / 2), length, 0, 2 * Math.PI, true);
-      cxt.closePath();
-      cxt.fill();
-    }
-  }
+  methods: {}
 }
 
 </script>
@@ -109,6 +80,6 @@ export default {
 
 #myCanvas {
   width: 100%;
-  height: 100%;
+  //height: 100%;
 }
 </style>
